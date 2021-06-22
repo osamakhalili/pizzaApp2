@@ -8,23 +8,23 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pizzas")
+
 public class Pizza {
 	
 	@Id
 	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "name")
+
 	private String name;
 	
-	@Column(name = "pizza_type")
+
 	private String pizzaType;
 	
-	@Column(name = "pizza_size")
+
 	private String pizzaSize;
 
-	@Column(name = "notes")
+
 	private String notes;
 
 

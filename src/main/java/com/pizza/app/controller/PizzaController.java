@@ -7,11 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import com.pizza.app.model.Pizza;
 
@@ -20,11 +16,13 @@ public class PizzaController {
 
 	@Autowired
 	private PizzaService pizzaService;
+
 	
 	// display list of pizzas
 	@GetMapping("/")
-	public String viewHomePage(Model model) {
-		return findPaginated(1, "name", "asc", model);
+	public String viewHomePage(Model model,String keyword) {
+
+		return findPaginated(1, "name", "asc", model,keyword);
 	}
 	
 	@GetMapping("/showNewPizzaForm")
@@ -66,11 +64,13 @@ public class PizzaController {
 	public String findPaginated(@PathVariable (value = "pageNo") int pageNo, 
 			@RequestParam("sortField") String sortField,
 			@RequestParam("sortDir") String sortDir,
-			Model model) {
+			Model model,String keyword) {
 		int pageSize = 5;
 		
 		Page<Pizza> page = pizzaService.findPaginated(pageNo, pageSize, sortField, sortDir);
-		List<Pizza> listPizzas = page.getContent();
+		List<Pizza> listPizzas ;
+
+
 		
 		model.addAttribute("currentPage", pageNo);
 		model.addAttribute("totalPages", page.getTotalPages());
@@ -79,8 +79,17 @@ public class PizzaController {
 		model.addAttribute("sortField", sortField);
 		model.addAttribute("sortDir", sortDir);
 		model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
-		
+
+		if (keyword !=null){
+
+			listPizzas = pizzaService.findByKeyword(keyword);
+		}else {
+
+			listPizzas = page.getContent();
+		}
 		model.addAttribute("listPizzas", listPizzas);
+
 		return "index";
 	}
+
 }
