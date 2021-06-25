@@ -12,18 +12,33 @@
 </head>
 <body>
 
+<style>
+	.search-form
+	{
+		float: right;
+	}
+	.search-input
+	{
+		display:inline-flex;
+	}
+
+</style>
+
 	<div class="container my-2">
 	<h1>Goteborg Pizza </h1>
 	
 	<a th:href = "@{/showNewPizzaForm}" class="btn btn-primary btn-sm mb-3"> Add Pizza </a>
 
 
-		<form th:action="@{/}" method="get" >
+		<form th:action="@{/}" method="get" class="search-form" >
 
-
+			<div class="form-group search-input">
 			<input  type="text"   name="keyword" />
+			</div>
 
+			<div class="form-group search-input">
 			<input type="submit" value="Search" class="btn btn-primary btn-sm mb-3" />
+			</div>
 
 		</form>
 
@@ -67,25 +82,25 @@
 
 
 		<div th:if = "${totalPages > 1}">
-			<div class = "row col-sm-10">
-				<div class = "col-sm-2">
+			<div class = "row ">
+				<div class = "col-sm-4">
 					Total Rows: [[${totalItems}]] 
 				</div>
-				<div class = "col-sm-1">
+				<div class = "col-sm-4">
 					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
 						<a th:if="${currentPage != i}" th:href="@{'/page/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
 						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
 					</span>
 				</div>
-				<div class = "col-sm-1">
+				<div class = "col-sm-4">
 					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
 					<span th:unless="${currentPage < totalPages}">Next</span>
+
+					<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+					<span th:unless="${currentPage < totalPages}">Last</span>
 				</div>
 
-				<div class="col-sm-1">
-    				<a th:if="${currentPage < totalPages}" th:href="@{'/page/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
-					<span th:unless="${currentPage < totalPages}">Last</span>
-   				 </div>
+
 			</div>
 		</div>
 	</div>

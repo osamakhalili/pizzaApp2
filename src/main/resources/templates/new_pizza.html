@@ -9,17 +9,27 @@
 	crossorigin="anonymous">
 </head>
 <body>
+<style>
+.inputclass
+{
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+</style>
 	<div class="container">
 		<h1>Goteborg Pizza</h1>
 		<hr>
 		<h2>Add Pizza</h2>
 
+
+
 		<form action="#" th:action="@{/savePizza}" th:object="${pizza}"
 			method="POST">
 			<input type="text" th:field="*{name}"
-				placeholder=" Name" class="form-control mb-4 col-4">
+				placeholder=" Name" class="form-control inputclass " >
 
-                <div th:size="50">
+                <div >
 				<select class="custom-select"  type="text"   th:field="*{pizzaType}" >
 				<option value="">pizza Type</option>
 				<option value="MARGHERITA">MARGHERITA</option>
@@ -32,7 +42,7 @@
 
             <br>
 
-			<div th:size="50">
+			<div >
 				<select class="custom-select"  type="text"   th:field="*{pizzaSize}" >
 					<option value="">pizza Size</option>
 					<option value="Big">Big</option>
@@ -44,7 +54,7 @@
 			<br>
 
 			    <input type="text" th:field="*{notes}"
-				   placeholder="pizza Notes " class="form-control mb-4 col-4">
+				   placeholder="pizza Notes " class="form-control inputclass">
 
 
 

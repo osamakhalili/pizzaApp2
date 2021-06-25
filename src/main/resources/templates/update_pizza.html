@@ -20,10 +20,30 @@
 			<input type="hidden" th:field="*{id}" />
 			
 			<input type="text" th:field="*{name}" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{pizzaType}" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{pizzaSize}" class="form-control mb-4 col-4">
+
+			<div >
+				<select class="custom-select"  type="text"   th:field="*{pizzaType}" >
+					<option value="">pizza Type</option>
+					<option value="MARGHERITA">MARGHERITA</option>
+					<option value="Vegan">Vegan</option>
+					<option value="Kebab">Kebab</option>
+					<option value="PEPPERONI">PEPPERONI</option>
+					<option value="CAPRICCIOSA">CAPRICCIOSA</option>
+				</select>
+			</div>
+			<br>
+
+
+
+			<div >
+				<select class="custom-select"  type="text"   th:field="*{pizzaSize}" >
+					<option value="">pizza Size</option>
+					<option value="Big">Big</option>
+					<option value="Medium">Medium</option>
+					<option value="Small">Small</option>
+				</select>
+			</div>
+			<br>
 
 			     <input type="text" th:field="*{notes}" class="form-control mb-4 col-4">
 				
